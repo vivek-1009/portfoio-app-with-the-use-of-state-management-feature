@@ -74,7 +74,34 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
             Greeting("vivek")
         }
     }
+@Composable
+fun App(){
+    Surface(modifier=Modifier.fillMaxSize()){
 
+    }
+}
+@Composable
+fun Tip(){
+Column(modifier=Modifier.fillMaxSize()){
+
+}
+}
+@Preview(showBackground=true)
+@Composable
+fun total(amount:Float=0f) {
+    Surface(
+        modifier = Modifier.fillMaxSize()
+            .padding(12.dp),tonalElevation=(5.dp),shape=RoundedCornerShape(4.dp)
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,modifier=Modifier.padding(vertical=20.dp).background(color = Color.Blue).fillMaxWidth()
+        ) {
+Text(text="total per person",style=TextStyle(color=Color.Black,fontSize=16.sp,fontWeight=FontWeight.Bold))
+            Spacer(modifier=Modifier.height(8.dp))
+            Text(text="$ $amount",style=TextStyle(color=Color.Black,fontSize=20.sp,fontWeight=FontWeight.Bold))
+        }
+    }
+}
 //State Hosting
 //@Composable
 //fun myapp(){
