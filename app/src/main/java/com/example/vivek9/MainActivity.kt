@@ -48,10 +48,10 @@ class MainActivity : ComponentActivity() {
         setContent {
             Vivek9Theme {
                 // A surface container using the 'background' color from the theme
-               // Port()
+                Port()
 //statemanagement()
+
                // myapp()
-                App()
             }
         }
     }
@@ -74,166 +74,110 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
             Greeting("vivek")
         }
     }
-@Composable
-fun App(){
-    Surface(modifier=Modifier.fillMaxSize()){
 
+
+//State Management
+fun getProjectList():List<Project>{
+    return listOf(
+        Project(name="vivek",des="I am developer"),
+        Project(name="vive",des="I am Game developer"),
+        Project(name="viv",des="I am Mobile  developer"),
+        Project(name="v",des="I am  busy developer")
+    )
+}
+
+data class Project(
+        var name:String,
+        var des:String
+        )
+
+@Composable
+fun Port() {
+    val isOpen=remember{
+        mutableStateOf(false)
     }
-}
-@Composable
-fun Tip(){
-Column(modifier=Modifier.fillMaxSize()){
-
-}
-}
-@Preview(showBackground=true)
-@Composable
-fun total(amount:Float=0f) {
     Surface(
-        modifier = Modifier.fillMaxSize()
-            .padding(12.dp),tonalElevation=(5.dp),shape=RoundedCornerShape(4.dp)
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight().padding(4.dp),
+        shape = RoundedCornerShape(5.dp), tonalElevation = (4.dp)
     ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,modifier=Modifier.padding(vertical=20.dp).background(color = Color.Blue).fillMaxWidth()
-        ) {
-Text(text="total per person",style=TextStyle(color=Color.Black,fontSize=16.sp,fontWeight=FontWeight.Bold))
-            Spacer(modifier=Modifier.height(8.dp))
-            Text(text="$ $amount",style=TextStyle(color=Color.Black,fontSize=20.sp,fontWeight=FontWeight.Bold))
+
+        Column(horizontalAlignment = Alignment.CenterHorizontally,modifier=Modifier.padding(10.dp)//.background(color=Color.Yellow)) {
+        ){
+            Image(
+                painter = painterResource(id = R.drawable.v),
+                contentDescription = null,
+                modifier = Modifier.size(19.dp)
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            Divider()
+            Text(
+                text = "VIVEK DHINGRA",
+                style = TextStyle(
+                    color = Color.Green,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = (20.sp)
+                )
+                // modifier = Modifier.padding(horizontal = 8.dp)
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            Text(
+                text = "ANDROID COMPOSABLE DEVELOPER",
+                style = TextStyle(
+                    color = Color.Green,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = (10.sp)
+                )
+                // modifier = Modifier.padding(horizontal = 8.dp)
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Image(
+                    painter = painterResource(id = R.drawable.v),
+                    contentDescription = null,
+                    modifier = Modifier.size(60.dp)
+                )
+                Text(
+                    text = "2001vivek",
+                    style = TextStyle(
+                        color = Color.Black,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = (10.sp)
+                    ),
+                    // modifier = Modifier.padding(horizontal = 8.dp)
+                    modifier = Modifier.padding(horizontal = 8.dp).size(60.dp)
+                )
+            }
+            Spacer(modifier = Modifier.height(80.dp))
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Button(onClick = {isOpen.value=!isOpen.value}, modifier = Modifier.height(80.dp)) {
+                    Text(text = "MY PROJECTS")
+                }
+            }
+            if(isOpen.value) {
+                LazyColumn {
+                    items(getProjectList()) {
+                        ProjectItem(it)
+                    }
+                }
+            }
         }
     }
 }
-//State Hosting
-//@Composable
-//fun myapp(){
-//    Surface(modifier=Modifier.fillMaxSize()){
-//dollarcounter()
-//    }
-//}
-//@Composable
-//fun dollarcounter(){
-//    val counter=remember{
-//        mutableStateOf(1)
-//    }
-//    Column(modifier=Modifier.fillMaxSize(),verticalArrangement= Arrangement.Center,horizontalAlignment=Alignment.CenterHorizontally){
-//        Text(text="$${counter.value*100}",style=TextStyle(color=Color.Black,fontWeight=FontWeight.Bold))
-//        Spacer(modifier=Modifier.height(190.dp))
-//        custombutton(){
-//            counter.value++
-//        }
-//    }
-//}
-//@Composable
-//fun custombutton(onClick:()->Unit){
-//    Card(modifier=Modifier.size(140.dp).clickable{
-//        onClick.invoke()
-//    }.background(color=Color.Yellow),shape= CircleShape){
-//  Box(modifier=Modifier.fillMaxSize(),contentAlignment=Alignment.Center){
-//    Text(text="Tap",style=TextStyle(color=Color.Green,fontSize=40.sp,fontWeight=FontWeight.Bold))
-//}
-//    }
-//}
-//State Management
-//fun getProjectList():List<Project>{
-//    return listOf(
-//        Project(name="vivek",des="jdv"),
-//        Project(name="vivek",des="jdv"),
-//        Project(name="vivek",des="jdv")
-//    )
-//}
-//
-//data class Project(
-//        var name:String,
-//        var des:String
-//        )
-//
-//@Composable
-//fun Port() {
-//    val isOpen=remember{
-//        mutableStateOf(false)
-//    }
-//    Surface(
-//        modifier = Modifier
-//            .fillMaxWidth()
-//            .fillMaxHeight().padding(4.dp),
-//        shape = RoundedCornerShape(5.dp), tonalElevation = (4.dp)
-//    ) {
-//
-//        Column(horizontalAlignment = Alignment.CenterHorizontally,modifier=Modifier.padding(10.dp)//.background(color=Color.Yellow)) {
-//        ){
-//            Image(
-//                painter = painterResource(id = R.drawable.v),
-//                contentDescription = null,
-//                modifier = Modifier.size(19.dp)
-//            )
-//            Spacer(modifier = Modifier.height(10.dp))
-//            Divider()
-//            Text(
-//                text = "VIVEK DHINGRA",
-//                style = TextStyle(
-//                    color = Color.Green,
-//                    fontWeight = FontWeight.Bold,
-//                    fontSize = (20.sp)
-//                )
-//                // modifier = Modifier.padding(horizontal = 8.dp)
-//            )
-//            Spacer(modifier = Modifier.height(10.dp))
-//            Text(
-//                text = "ANDROID COMPOSABLE DEVELOPER",
-//                style = TextStyle(
-//                    color = Color.Green,
-//                    fontWeight = FontWeight.Bold,
-//                    fontSize = (10.sp)
-//                )
-//                // modifier = Modifier.padding(horizontal = 8.dp)
-//            )
-//            Spacer(modifier = Modifier.height(10.dp))
-//            Row(verticalAlignment = Alignment.CenterVertically) {
-//                Image(
-//                    painter = painterResource(id = R.drawable.v),
-//                    contentDescription = null,
-//                    modifier = Modifier.size(60.dp)
-//                )
-//                Text(
-//                    text = "2001vivek",
-//                    style = TextStyle(
-//                        color = Color.Black,
-//                        fontWeight = FontWeight.Bold,
-//                        fontSize = (10.sp)
-//                    ),
-//                    // modifier = Modifier.padding(horizontal = 8.dp)
-//                    modifier = Modifier.padding(horizontal = 8.dp).size(60.dp)
-//                )
-//            }
-//            Spacer(modifier = Modifier.height(80.dp))
-//            Row(verticalAlignment = Alignment.CenterVertically) {
-//                Button(onClick = {isOpen.value=!isOpen.value}, modifier = Modifier.height(80.dp)) {
-//                    Text(text = "MY PROJECTS")
-//                }
-//            }
-//            if(isOpen.value) {
-//                LazyColumn {
-//                    items(getProjectList()) {
-//                        ProjectItem(it)
-//                    }
-//                }
-//            }
-//        }
-//    }
-//}
-//@Composable
-//fun ProjectItem(project:Project){
-//Row(modifier=Modifier.fillMaxWidth().padding(8.dp)){
-//
-//    Image(
-//        painter = painterResource(id = R.drawable.v),
-//        contentDescription = null,
-//        modifier = Modifier.size(60.dp).clip(CircleShape)
-//    )
-//    Column(modifier=Modifier.padding(horizontal=8.dp)){
-//       Text(text=project.name,style=MaterialTheme.typography.headlineSmall)
-//        Text(text=project.des,style=MaterialTheme.typography.headlineLarge)
-//    }
-//
-//}
-//}
+@Composable
+fun ProjectItem(project:Project){
+Row(modifier=Modifier.fillMaxWidth().padding(8.dp)){
 
+    Image(
+        painter = painterResource(id = R.drawable.v),
+        contentDescription = null,
+        modifier = Modifier.size(60.dp).clip(CircleShape)
+    )
+    Column(modifier=Modifier.padding(horizontal=8.dp)){
+       Text(text=project.name,style=MaterialTheme.typography.headlineSmall)
+        Text(text=project.des,style=MaterialTheme.typography.headlineLarge)
+    }
+
+}
+}
